@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import Background from './components/Background';
 import Intro from './screens/Intro';
 import WhyYou from './screens/WhyYou';
 import Memories from './screens/Memories';
 import Proposal from './screens/Proposal';
 import Yay from './screens/Yay';
 import FinalLetter from './screens/FinalLetter';
-import FloatingHearts from './components/FloatingHearts';
 import './index.css';
 
 function App() {
@@ -27,7 +27,6 @@ function App() {
         return (
           <Proposal 
             onYes={() => handleScreenChange('yay')}
-            onNo={() => handleScreenChange('proposal')}
           />
         );
       case 'yay':
@@ -41,12 +40,14 @@ function App() {
 
   return (
     <div className="app">
-      <FloatingHearts />
-      <div className="screen-container">
-        {renderScreen()}
-      </div>
+      <Background>
+        <div className="screen-container">
+          {renderScreen()}
+        </div>
+      </Background>
     </div>
   );
 }
 
 export default App;
+
