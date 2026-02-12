@@ -22,10 +22,18 @@ body {
   min-height: 100vh;
   color: var(--dark-color);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overscroll-behavior: none;
 }
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  height: 100%;
 }
 
 button {
@@ -33,10 +41,21 @@ button {
   border: none;
   font-size: 1rem;
   transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
-button:hover {
-  transform: translateY(-2px);
+button:active {
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  border: none;
+  outline: none;
 }
 
 .container {
@@ -58,12 +77,50 @@ button:hover {
   }
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 0 10px;
+/* Touch device optimization */
+@media (hover: none) and (pointer: coarse) {
+  button {
+    min-height: 44px;
+    min-width: 44px;
   }
-  
+
+  .button {
+    min-height: 44px;
+  }
+
+  .interactive-heart {
+    min-height: 140px;
+  }
+}
+
+/* Prevent zoom on input focus for iOS */
+input, textarea, select {
+  font-size: 16px;
+}
+
+/* Improve scrolling performance on mobile */
+.white-card,
+.flip-card-back {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix for notch devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+    padding-top: max(0px, env(safe-area-inset-top));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 15px;
+  }
+
   body {
     font-size: 14px;
   }
 }
+

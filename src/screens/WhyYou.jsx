@@ -1,18 +1,23 @@
 import { useState } from 'react';
+import HeartShape from '../components/HeartShape';
 
 export function WhyYou({ onNext }) {
   const heartData = [
-    { id: 1, text: 'You make me smile', color: '#ff6b9d', emoji: '😊' },
-    { id: 2, text: 'I love being with you', color: '#ff9a8b', emoji: '🥰' },
-    { id: 3, text: 'You are my favorite', color: '#ffd699', emoji: '⭐' },
-    { id: 4, text: 'You mean a lot to me', color: '#9dabff', emoji: '💜' }
+    { id: 1, text: 'You make me smile', color: '#ff9a9a' },
+    { id: 2, text: 'I love being with you', color: '#ffb366' },
+    { id: 3, text: 'You are my favorite', color: '#ff69b4' },
+    { id: 4, text: 'You mean a lot to me', color: '#c9a3ff' }
   ];
 
   const [clickedHearts, setClickedHearts] = useState(new Set());
 
   const handleHeartClick = (id) => {
     const newSet = new Set(clickedHearts);
-    newSet.add(id);
+    if (newSet.has(id)) {
+      newSet.delete(id);
+    } else {
+      newSet.add(id);
+    }
     setClickedHearts(newSet);
   };
 
@@ -26,22 +31,14 @@ export function WhyYou({ onNext }) {
 
         <div className="hearts-interactive-grid">
           {heartData.map(heart => (
-            <button
+            <HeartShape
               key={heart.id}
-              className={`interactive-heart ${clickedHearts.has(heart.id) ? 'clicked' : ''}`}
-              style={{ 
-                '--heart-color': heart.color,
-                backgroundColor: clickedHearts.has(heart.id) ? heart.color : 'rgba(255,255,255,0.1)',
-              }}
-              onClick={() => handleHeartClick(heart.id)}
-            >
-              <div className="heart-shape">
-                <span className="heart-emoji">{heart.emoji}</span>
-              </div>
-              {clickedHearts.has(heart.id) && (
-                <p className="heart-text slideInUp">{heart.text}</p>
-              )}
-            </button>
+              id={heart.id}
+              color={heart.color}
+              text={heart.text}
+              isClicked={clickedHearts.has(heart.id)}
+              onClick={handleHeartClick}
+            />
           ))}
         </div>
 
