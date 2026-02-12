@@ -143,8 +143,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(80%, 80vw, 580px);
-  max-width: 95vw;
+  width: clamp(90%, 90vw, 90vw);
+  max-width: 98vw;
   height: auto;
   max-height: min(95vh, 95vh);
   z-index: 10;
@@ -160,7 +160,7 @@
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.15),
     0 0 40px rgba(255, 107, 157, 0.1);
-  padding: clamp(12px, 2.5vw, 24px) clamp(10px, 2vw, 20px);
+  padding: clamp(12px, 2.5vw, 20px) clamp(10px, 2vw, 18px);
   overflow-y: auto;
   overflow-x: hidden;
   transform: rotate(-2deg);
@@ -168,7 +168,7 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
-  gap: clamp(4px, 1vw, 12px);
+  gap: clamp(2px, 1vw, 8px);
 }
 
 .white-card:hover {
@@ -207,7 +207,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: clamp(20px, 5vw, 40px);
+  padding: clamp(8px, 2vw, 16px);
   animation: fadeInScale 0.6s ease-out;
 }
 
@@ -948,13 +948,13 @@
 /* Large Screens (1024px and above) */
 @media (min-width: 1024px) {
   .card-container {
-    max-width: 650px;
-    width: 80vw;
+    max-width: none;
+    width: 90vw;
     max-height: 92vh;
   }
 
   .white-card {
-    padding: clamp(20px, 3.5vw, 28px) clamp(18px, 3vw, 24px);
+    padding: clamp(16px, 2.5vw, 24px) clamp(14px, 2vw, 20px);
   }
 
   .hearts-interactive-grid {
@@ -975,13 +975,13 @@
 /* Tablets (769px - 1023px) */
 @media (max-width: 1023px) and (min-width: 769px) {
   .card-container {
-    max-width: 650px;
-    width: 95%;
+    max-width: none;
+    width: 90vw;
     max-height: 88vh;
   }
 
   .white-card {
-    padding: clamp(30px, 4vw, 35px) clamp(24px, 4vw, 30px);
+    padding: clamp(16px, 2.5vw, 22px) clamp(14px, 2vw, 18px);
   }
 
   .intro-title,
@@ -1100,12 +1100,12 @@
 /* Small tablets and large phones (576px - 768px) */
 @media (max-width: 768px) and (min-width: 576px) {
   .card-container {
-    max-width: 95%;
+    max-width: 92vw;
     max-height: 90vh;
   }
 
   .white-card {
-    padding: clamp(24px, 3vw, 30px) clamp(20px, 3vw, 24px);
+    padding: clamp(12px, 2.5vw, 18px) clamp(10px, 2vw, 16px);
   }
 
   .intro-title,
@@ -1295,18 +1295,18 @@
 /* Mobile phones (375px - 575px) */
 @media (max-width: 575px) and (min-width: 375px) {
   .card-container {
-    width: 98%;
+    width: 94vw;
     max-width: 100%;
     max-height: 92vh;
   }
 
   .white-card {
-    padding: clamp(18px, 3vw, 24px) clamp(14px, 2vw, 18px);
+    padding: clamp(12px, 2.5vw, 16px) clamp(10px, 1.5vw, 14px);
     border-radius: 16px;
   }
 
   .screen-wrapper {
-    padding: clamp(15px, 3vw, 20px) clamp(8px, 2vw, 10px);
+    padding: clamp(8px, 1.5vw, 12px) clamp(4px, 1vw, 8px);
     min-height: auto;
   }
 
@@ -1574,17 +1574,17 @@
 /* Extra small phones (< 375px) */
 @media (max-width: 374px) {
   .card-container {
-    width: 99%;
+    width: 92vw;
     max-height: 95vh;
   }
 
   .white-card {
-    padding: clamp(16px, 3vw, 20px) clamp(12px, 2vw, 14px);
+    padding: clamp(10px, 2vw, 14px) clamp(8px, 1.5vw, 12px);
     border-radius: 14px;
   }
 
   .screen-wrapper {
-    padding: clamp(12px, 2vw, 15px) clamp(6px, 1vw, 8px);
+    padding: clamp(6px, 1vw, 10px) clamp(4px, 0.8vw, 6px);
   }
 
   .intro-title,
