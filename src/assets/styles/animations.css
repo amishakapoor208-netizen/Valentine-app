@@ -292,3 +292,43 @@
   animation: popHeart 0.4s ease-out;
 }
 
+/* Gift Box Animations */
+@keyframes giftBoxBounce {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.02);
+  }
+}
+
+@keyframes lidFlipLeft {
+  0%, 100% {
+    transform: rotateZ(-5deg) rotateY(0deg);
+  }
+  25% {
+    transform: rotateZ(-5deg) rotateY(-60deg);
+  }
+  50% {
+    transform: rotateZ(-5deg) rotateY(-60deg);
+  }
+  75% {
+    transform: rotateZ(-5deg) rotateY(-30deg);
+  }
+}
+
+@keyframes lidFlipRight {
+  0%, 100% {
+    transform: rotateZ(5deg) rotateY(0deg);
+  }
+  25% {
+    transform: rotateZ(5deg) rotateY(60deg);
+  }
+  50% {
+    transform: rotateZ(5deg) rotateY(60deg);
+  }
+  75% {
+    transform: rotateZ(5deg) rotateY(30deg);
+  }
+}
+

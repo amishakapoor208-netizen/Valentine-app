@@ -6,7 +6,7 @@
 .app {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: auto;
   background: linear-gradient(135deg, #ffd4e5 0%, #ffc0cb 50%, #ffe4e8 100%);
   overflow: hidden;
 }
@@ -198,7 +198,7 @@
 .screen-container {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: auto;
   z-index: 15;
 }
 
@@ -206,7 +206,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: auto;
+  max-height: clamp(auto, 100vh, 100vh);
   padding: clamp(8px, 2vw, 16px);
   animation: fadeInScale 0.6s ease-out;
 }
@@ -236,11 +237,173 @@
   animation: cardEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+.cute-gift-container {
+  width: clamp(120px, 28vw, 220px);
+  height: clamp(140px, 32vw, 260px);
+  margin: 0 auto clamp(12px, 3vw, 24px);
+  animation: cardEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.cute-gift-container:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.2));
+}
+
+.cute-gift-container:active {
+  transform: scale(0.98);
+}
+
 .gift-illustration {
   width: 100%;
   height: 100%;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
   animation: float 3s ease-in-out infinite;
+}
+
+.cute-gift-box {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.15));
+  animation: giftBoxBounce 2s ease-in-out infinite;
+}
+
+.cute-gift-box .lid-left {
+  animation: lidFlipLeft 3s ease-in-out infinite;
+  transform-origin: 115px 120px;
+}
+
+.cute-gift-box .lid-right {
+  animation: lidFlipRight 3s ease-in-out infinite;
+  transform-origin: 125px 120px;
+}
+
+/* ==================== CARD OPENING ANIMATION ==================== */
+
+.card-opening-container {
+  width: clamp(100px, 25vw, 200px);
+  height: clamp(100px, 25vw, 200px);
+  margin: 0 auto clamp(12px, 3vw, 24px);
+  perspective: 1200px;
+}
+
+.card-opening-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.card-envelope {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ffb3d9 0%, #ff9ac5 100%);
+  border-radius: 8px;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.2),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.envelope-flap {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(135deg, #ffb3d9 0%, #ff9ac5 100%);
+  origin: bottom;
+  z-index: 2;
+  box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.top-flap {
+  top: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: bottom center;
+  animation: topFlapOpen 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.bottom-flap {
+  bottom: 0;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  transform-origin: top center;
+  animation: bottomFlapOpen 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.card-envelope.opening .top-flap {
+  animation: topFlapOpen 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.card-envelope.opening .bottom-flap {
+  animation: bottomFlapOpen 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.card-inside {
+  position: absolute;
+  inset: 4%;
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe4cc 100%);
+  border-radius: 6px;
+  z-index: 0;
+  box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.teddy-surprise {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: teddyPop 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;
+}
+
+.teddy-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes topFlapOpen {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(-160deg);
+  }
+}
+
+@keyframes bottomFlapOpen {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(160deg);
+  }
+}
+
+@keyframes teddyPop {
+  0% {
+    transform: scale(0) translateY(20px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) translateY(-5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
 }
 
 .intro-title {
@@ -441,20 +604,20 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 4vw, 24px);
+  gap: clamp(10px, 2vw, 16px);
 }
 
 .memory-carousel {
   background: white;
   border-radius: 15px;
-  padding: clamp(10px, 2.5vw, 16px);
-  margin: clamp(6px, 1.5vw, 12px) 0;
+  padding: clamp(8px, 2vw, 14px);
+  margin: clamp(4px, 1vw, 8px) 0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(8px, 2vw, 14px);
+  gap: clamp(6px, 1.5vw, 10px);
   animation: fadeInScale 0.6s ease-out;
   width: 100%;
 }
@@ -463,7 +626,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(10px, 2vw, 15px);
+  gap: clamp(4px, 1vw, 6px);
   width: 100%;
   max-width: 100%;
 }
@@ -472,14 +635,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(12px, 3vw, 24px);
+  gap: clamp(6px, 1.5vw, 12px);
   width: 100%;
   flex-wrap: wrap;
 }
 
 .memory-image {
-  width: clamp(150px, 50vw, 380px);
-  height: clamp(150px, 50vw, 380px);
+  width: clamp(120px, 30vw, 220px);
+  height: clamp(120px, 30vw, 220px);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -498,21 +661,22 @@
 }
 
 .memory-info h3 {
-  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
-  margin-bottom: clamp(8px, 2vw, 12px);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  margin-bottom: clamp(4px, 1vw, 6px);
   font-weight: 700;
+  color: #2f3542;
 }
 
 .memory-info p {
-  font-size: clamp(0.85rem, 2.2vw, 1rem);
-  line-height: 1.5;
-  margin-bottom: clamp(8px, 2vw, 10px);
+  font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+  line-height: 1.4;
+  margin-bottom: clamp(4px, 1vw, 6px);
   color: #555;
 }
 
 .memory-date {
   display: block;
-  font-size: 0.85rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.8rem);
   color: #999;
   font-style: italic;
 }
@@ -521,10 +685,10 @@
   background: rgba(255, 107, 157, 0.2);
   color: #ff6b9d;
   border: 2px solid #ff6b9d;
-  width: clamp(32px, 8vw, 50px);
-  height: clamp(32px, 8vw, 50px);
+  width: clamp(32px, 5vw, 40px);
+  height: clamp(32px, 5vw, 40px);
   border-radius: 50%;
-  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
@@ -655,12 +819,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(20px, 5vw, 30px);
+  gap: clamp(8px, 2vw, 14px);
   width: 100%;
 }
 
 .yay-title {
-  font-size: clamp(1.8rem, 6vw, 3.5rem);
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
   color: #ff6b9d;
   text-shadow: 
     2px 2px 4px rgba(0, 0, 0, 0.1),
@@ -671,11 +835,11 @@
 
 .confetti-container {
   display: flex;
-  gap: clamp(8px, 1.5vw, 12px);
-  font-size: clamp(1.2rem, 4vw, 2rem);
+  gap: clamp(6px, 1vw, 10px);
+  font-size: clamp(1rem, 3.5vw, 1.6rem);
   flex-wrap: wrap;
   justify-content: center;
-  margin: clamp(8px, 2vw, 16px) 0;
+  margin: clamp(4px, 1vw, 10px) 0;
 }
 
 .confetti {
@@ -708,27 +872,29 @@
 }
 
 .yay-text {
-  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   color: #2f3542;
   font-weight: 600;
   margin: 0;
+  line-height: 1.4;
 }
 
 .yay-subtext {
-  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
   color: #666;
-  margin: 0;
+  margin: clamp(4px, 1vw, 8px) 0 0 0;
+  line-height: 1.4;
 }
 
 .progress-dots {
   display: flex;
-  gap: clamp(8px, 2vw, 10px);
-  margin-top: clamp(15px, 3vw, 20px);
+  gap: clamp(6px, 1.5vw, 8px);
+  margin-top: clamp(10px, 2vw, 14px);
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  width: clamp(8px, 1.5vw, 10px);
+  height: clamp(8px, 1.5vw, 10px);
   border-radius: 50%;
   background: #ff6b9d;
   animation: pulse 1.5s ease-in-out infinite;
@@ -744,9 +910,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: clamp(10px, 2vw, 14px);
   width: 100%;
-  max-width: 600px;
+  max-width: 100%;
 }
 
 .final-title {
@@ -760,15 +926,15 @@
 .final-subtitle {
   font-size: clamp(0.85rem, 2.5vw, 1rem);
   color: #888;
-  margin-bottom: 20px;
+  margin-bottom: clamp(10px, 2vw, 14px);
   animation: slideInUp 0.4s ease-out 0.1s both;
 }
 
 .flip-card-container {
   perspective: 1000px;
-  height: 400px;
+  height: clamp(280px, 55vw, 360px);
   width: 100%;
-  margin: 20px 0;
+  margin: clamp(10px, 2vw, 16px) 0;
   animation: fadeInScale 0.6s ease-out;
 }
 
@@ -796,7 +962,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 15px;
-  padding: 30px;
+  padding: clamp(14px, 2.5vw, 20px);
 }
 
 .flip-card-front {
@@ -811,6 +977,7 @@
   transform: rotateY(180deg);
   overflow-y: auto;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: clamp(12px, 2.5vw, 18px);
 }
 
 .flip-card-back::-webkit-scrollbar {
@@ -832,9 +999,9 @@
 }
 
 .teddy-wrapper {
-  width: clamp(90px, 22vw, 160px);
-  height: clamp(110px, 25vw, 180px);
-  margin-bottom: clamp(12px, 2vw, 16px);
+  width: clamp(80px, 20vw, 130px);
+  height: clamp(100px, 22vw, 150px);
+  margin-bottom: clamp(10px, 2vw, 14px);
   animation: float 3s ease-in-out infinite;
 }
 
@@ -855,20 +1022,25 @@
 .letter-content-inner {
   text-align: left;
   color: #2f3542;
+  border: 2px dashed #ff6b9d;
+  border-radius: 10px;
+  padding: clamp(12px, 2.5vw, 18px);
+  background: rgba(255, 107, 157, 0.02);
 }
 
 .letter-content-inner h2 {
-  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   color: #ff6b9d;
   text-align: center;
-  margin-bottom: clamp(15px, 3vw, 20px);
+  margin-bottom: clamp(8px, 1.5vw, 12px);
+  margin-top: 0;
   font-weight: 700;
 }
 
 .letter-content-inner p {
   font-size: clamp(0.85rem, 2vw, 1rem);
-  line-height: 1.8;
-  margin-bottom: clamp(10px, 2vw, 15px);
+  line-height: 1.6;
+  margin: 0 0 clamp(6px, 1vw, 10px) 0;
   text-align: justify;
   color: #555;
 }
@@ -876,7 +1048,7 @@
 .signature {
   text-align: right;
   font-weight: 600;
-  margin-top: 30px;
+  margin-top: clamp(16px, 3vw, 20px);
   line-height: 1.8;
 }
 

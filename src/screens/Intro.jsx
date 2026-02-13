@@ -1,25 +1,25 @@
 import { useState } from 'react';
-import GiftIllustration from '../components/GiftIllustration';
+import CuteGiftBox from '../components/CuteGiftBox';
 
 export function Intro({ onNext }) {
   const [clicked, setClicked] = useState(false);
 
   const handleOpen = () => {
     setClicked(true);
-    setTimeout(onNext, 800);
+    setTimeout(onNext, 1200);
   };
 
   return (
     <div className="screen-wrapper">
       <div className="intro-content">
-        <div className="gift-container">
-          <GiftIllustration />
+        <div className="cute-gift-container" onClick={handleOpen} style={{ cursor: 'pointer' }}>
+          <CuteGiftBox />
         </div>
 
         <h1 className="intro-title">Hey Cutiepie 💕</h1>
 
         <p className="intro-subtitle">
-          This Valentine, I made a little something special for you.
+          {clicked ? 'Here comes the surprise!' : 'Click the gift box to open it!'}
         </p>
 
         <button 
@@ -27,7 +27,7 @@ export function Intro({ onNext }) {
           onClick={handleOpen}
           disabled={clicked}
         >
-          {clicked ? 'Opening...' : 'Open it'}
+          {clicked ? 'Opening...' : 'Open the gift'}
         </button>
       </div>
     </div>
