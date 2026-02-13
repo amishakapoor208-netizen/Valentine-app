@@ -1,0 +1,1975 @@
+@import './assets/styles/global.css';
+@import './assets/styles/animations.css';
+
+/* ==================== APP CONTAINER ==================== */
+
+.app {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  background: linear-gradient(135deg, #ffd4e5 0%, #ffc0cb 50%, #ffe4e8 100%);
+  overflow: hidden;
+}
+
+/* ==================== BACKGROUND SYSTEM ==================== */
+
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.background-base {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.background-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffd4e5 0%, #ffc0cb 50%, #ffe4e8 100%);
+}
+
+.grid-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.5;
+}
+
+.floating-hearts-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-heart-bg {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0;
+  will-change: transform;
+}
+
+.scallop-top,
+.scallop-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 4;
+  background: white;
+}
+
+.scallop-top {
+  top: 0;
+}
+
+.scallop-bottom {
+  bottom: 0;
+  transform: scaleY(-1);
+}
+
+.scallop-top svg,
+.scallop-bottom svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tape {
+  position: absolute;
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(255, 192, 203, 0.85), rgba(255, 182, 193, 0.85));
+  box-shadow: 
+    inset 0 1px 3px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.1),
+    3px 3px 8px rgba(0, 0, 0, 0.15);
+  z-index: 5;
+  border-radius: 2px;
+  transform: rotate(-8deg);
+  backdrop-filter: blur(5px);
+}
+
+.tape-inner {
+  position: absolute;
+  inset: 4px;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.3) 10px,
+    rgba(255, 255, 255, 0.3) 20px
+  );
+  border-radius: 1px;
+}
+
+.tape-top-left {
+  top: 100px;
+  left: 20px;
+  transform: rotate(-15deg);
+}
+
+.tape-bottom-right {
+  bottom: 100px;
+  right: 20px;
+  transform: rotate(10deg);
+}
+
+.card-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(90%, 90vw, 90vw);
+  max-width: 98vw;
+  height: auto;
+  max-height: min(95vh, 95vh);
+  z-index: 10;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.white-card {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 0 40px rgba(255, 107, 157, 0.1);
+  padding: clamp(12px, 2.5vw, 20px) clamp(10px, 2vw, 18px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  gap: clamp(2px, 1vw, 8px);
+}
+
+.white-card:hover {
+  transform: rotate(-1.5deg);
+}
+
+.white-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.white-card::-webkit-scrollbar-track {
+  background: rgba(255, 107, 157, 0.1);
+  border-radius: 10px;
+}
+
+.white-card::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 157, 0.5);
+  border-radius: 10px;
+}
+
+.white-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 107, 157, 0.8);
+}
+
+/* ==================== SCREEN SYSTEM ==================== */
+
+.screen-container {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  z-index: 15;
+}
+
+.screen-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: auto;
+  max-height: clamp(auto, 100vh, 100vh);
+  padding: clamp(8px, 2vw, 16px);
+  animation: fadeInScale 0.6s ease-out;
+}
+
+.intro-content,
+.why-you-content,
+.memories-content,
+.proposal-content,
+.yay-content,
+.final-letter-content {
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 2vw, 16px);
+  flex-shrink: 0;
+}
+
+/* ==================== INTRO SCREEN ==================== */
+
+.gift-container {
+  width: clamp(100px, 25vw, 200px);
+  height: clamp(100px, 25vw, 200px);
+  margin: 0 auto clamp(12px, 3vw, 24px);
+  animation: cardEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cute-gift-container {
+  width: clamp(120px, 28vw, 220px);
+  height: clamp(140px, 32vw, 260px);
+  margin: 0 auto clamp(12px, 3vw, 24px);
+  animation: cardEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.cute-gift-container:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.2));
+}
+
+.cute-gift-container:active {
+  transform: scale(0.98);
+}
+
+.gift-illustration {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+  animation: float 3s ease-in-out infinite;
+}
+
+.cute-gift-box {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.15));
+  animation: giftBoxBounce 2s ease-in-out infinite;
+}
+
+.cute-gift-box .lid-left {
+  animation: lidFlipLeft 3s ease-in-out infinite;
+  transform-origin: 115px 120px;
+}
+
+.cute-gift-box .lid-right {
+  animation: lidFlipRight 3s ease-in-out infinite;
+  transform-origin: 125px 120px;
+}
+
+/* ==================== CARD OPENING ANIMATION ==================== */
+
+.card-opening-container {
+  width: clamp(100px, 25vw, 200px);
+  height: clamp(100px, 25vw, 200px);
+  margin: 0 auto clamp(12px, 3vw, 24px);
+  perspective: 1200px;
+}
+
+.card-opening-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.card-envelope {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ffb3d9 0%, #ff9ac5 100%);
+  border-radius: 8px;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.2),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.envelope-flap {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(135deg, #ffb3d9 0%, #ff9ac5 100%);
+  origin: bottom;
+  z-index: 2;
+  box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.top-flap {
+  top: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: bottom center;
+  animation: topFlapOpen 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.bottom-flap {
+  bottom: 0;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  transform-origin: top center;
+  animation: bottomFlapOpen 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.card-envelope.opening .top-flap {
+  animation: topFlapOpen 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.card-envelope.opening .bottom-flap {
+  animation: bottomFlapOpen 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.card-inside {
+  position: absolute;
+  inset: 4%;
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe4cc 100%);
+  border-radius: 6px;
+  z-index: 0;
+  box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.teddy-surprise {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: teddyPop 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;
+}
+
+.teddy-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes topFlapOpen {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(-160deg);
+  }
+}
+
+@keyframes bottomFlapOpen {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(160deg);
+  }
+}
+
+@keyframes teddyPop {
+  0% {
+    transform: scale(0) translateY(20px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) translateY(-5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.intro-title {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  color: #2f3542;
+  margin-bottom: clamp(4px, 1vw, 8px);
+  font-weight: 700;
+  animation: slideInDown 0.6s ease-out;
+}
+
+.intro-subtitle {
+  font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: clamp(12px, 2vw, 18px);
+  animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+.open-button {
+  animation: slideInUp 0.6s ease-out 0.4s both;
+}
+
+/* ==================== WHY YOU SCREEN ==================== */
+
+.section-title {
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  color: #2f3542;
+  margin-bottom: clamp(2px, 0.5vw, 6px);
+  font-weight: 700;
+  animation: slideInDown 0.6s ease-out;
+}
+
+.section-subtitle {
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  color: #888;
+  margin-bottom: clamp(8px, 2vw, 12px);
+  animation: slideInUp 0.4s ease-out 0.1s both;
+}
+
+.hearts-interactive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(10px, 2.5vw, 14px);
+  margin: clamp(8px, 2vw, 16px) auto;
+  max-width: clamp(250px, 70vw, 350px);
+  justify-items: center;
+}
+
+.interactive-heart {
+  position: relative;
+  width: clamp(80px, 18vw, 130px);
+  height: clamp(80px, 18vw, 130px);
+  border: none;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+  cursor: pointer;
+  transition: background-color 0.4s ease, transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  animation: fadeInScale 0.6s ease-out;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.interactive-heart:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.interactive-heart:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.interactive-heart:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.interactive-heart:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.interactive-heart:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.interactive-heart.clicked {
+  background: white !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.heart-emoji-only {
+  font-size: clamp(2rem, 8vw, 3rem);
+  animation: float 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.interactive-heart.clicked .heart-emoji {
+  animation: popHeart 0.4s ease-out;
+}
+
+.heart-text {
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  font-weight: 600;
+  color: #2f3542;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+  animation: slideInUp 0.5s ease-out;
+}
+
+/* Heart Shape Button Styles */
+.heart-shape-button {
+  position: relative;
+  width: clamp(100px, 20vw, 140px);
+  height: clamp(100px, 20vw, 140px);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+  animation: fadeInScale 0.6s ease-out;
+}
+
+.heart-shape-button:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.heart-shape-button:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.heart-shape-button:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.heart-shape-button:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.heart-shape-button:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.heart-shape-button:active {
+  transform: scale(0.95);
+}
+
+.heart-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+  transition: filter 0.3s ease;
+}
+
+.heart-svg path {
+  transition: fill 0.6s ease, stroke 0.6s ease;
+}
+
+.heart-shape-button:hover .heart-svg {
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.2));
+}
+
+.heart-shape-text {
+  font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+  color: #555;
+  text-align: center;
+  line-height: 1.3;
+  padding: clamp(8px, 2vw, 15px);
+  margin: 0;
+  pointer-events: none;
+  max-width: 90%;
+  animation: fadeIn 0.6s ease 0.2s both;
+}
+
+.continue-button {
+  margin-top: clamp(15px, 4vw, 20px);
+  animation: slideInUp 0.6s ease-out 0.5s both;
+}
+
+.continue-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.continue-button.ready {
+  opacity: 1;
+  cursor: pointer;
+}
+
+/* ==================== MEMORIES SCREEN ==================== */
+
+.memories-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vw, 16px);
+}
+
+.memory-carousel {
+  background: white;
+  border-radius: 15px;
+  padding: clamp(8px, 2vw, 14px);
+  margin: clamp(4px, 1vw, 8px) 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 1.5vw, 10px);
+  animation: fadeInScale 0.6s ease-out;
+  width: 100%;
+}
+
+.carousel-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 1vw, 6px);
+  width: 100%;
+  max-width: 100%;
+}
+
+.image-with-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 1.5vw, 12px);
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.memory-image {
+  width: clamp(120px, 30vw, 220px);
+  height: clamp(120px, 30vw, 220px);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.memory-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memory-info {
+  color: #2f3542;
+}
+
+.memory-info h3 {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  margin-bottom: clamp(4px, 1vw, 6px);
+  font-weight: 700;
+  color: #2f3542;
+}
+
+.memory-info p {
+  font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+  line-height: 1.4;
+  margin-bottom: clamp(4px, 1vw, 6px);
+  color: #555;
+}
+
+.memory-date {
+  display: block;
+  font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+  color: #999;
+  font-style: italic;
+}
+
+.carousel-btn {
+  background: rgba(255, 107, 157, 0.2);
+  color: #ff6b9d;
+  border: 2px solid #ff6b9d;
+  width: clamp(32px, 5vw, 40px);
+  height: clamp(32px, 5vw, 40px);
+  border-radius: 50%;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.carousel-btn:hover {
+  background: #ff6b9d;
+  color: white;
+  transform: scale(1.1);
+}
+
+.carousel-indicators {
+  display: flex;
+  gap: clamp(6px, 1.5vw, 10px);
+  justify-content: center;
+  margin-top: clamp(12px, 2vw, 15px);
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 107, 157, 0.3);
+  border: 2px solid #ff6b9d;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #ff6b9d;
+  transform: scale(1.3);
+}
+
+/* ==================== PROPOSAL SCREEN ==================== */
+
+.cat-container {
+  width: clamp(90px, 22vw, 160px);
+  height: clamp(90px, 25vw, 180px);
+  margin: 0 auto clamp(16px, 3vw, 24px);
+  animation: cardEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cat-illustration {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+  animation: float 3s ease-in-out infinite;
+}
+
+.proposal-title {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  color: #2f3542;
+  margin-bottom: clamp(6px, 1.5vw, 10px);
+  font-weight: 700;
+  animation: slideInDown 0.6s ease-out;
+}
+
+.proposal-text {
+  font-size: clamp(0.9rem, 2.2vw, 1rem);
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: clamp(10px, 2vw, 16px);
+  animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+.proposal-buttons {
+  display: flex;
+  gap: clamp(8px, 1.5vw, 16px);
+  justify-content: center;
+  margin-top: clamp(6px, 1.5vw, 12px);
+  flex-wrap: wrap;
+  animation: slideInUp 0.6s ease-out 0.4s both;
+}
+
+.button-yes {
+  background: linear-gradient(135deg, #48dbfb 0%, #00d2d3 100%);
+  color: white;
+  padding: clamp(8px, 2vw, 12px) clamp(20px, 4vw, 32px);
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  font-weight: 700;
+  min-width: clamp(100px, 25vw, 130px);
+  box-shadow: 0 10px 25px rgba(72, 219, 251, 0.3);
+}
+
+.button-yes:hover {
+  transform: scale(1.08);
+  box-shadow: 0 15px 35px rgba(72, 219, 251, 0.4);
+}
+
+.button-no {
+  background: rgba(255, 255, 255, 0.3);
+  color: #2f3542;
+  padding: clamp(8px, 2vw, 12px) clamp(20px, 4vw, 32px);
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  font-weight: 700;
+  min-width: clamp(120px, 30vw, 150px);
+  border: 2px solid #2f3542;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer !important;
+}
+
+.button-no:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.proposal-response {
+  color: #2f3542;
+}
+
+.proposal-response h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.proposal-response p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* ==================== YAY SCREEN ==================== */
+
+.yay-screen {
+  background: linear-gradient(135deg, rgba(72, 219, 251, 0.1), rgba(0, 200, 83, 0.1));
+}
+
+.yay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 2vw, 14px);
+  width: 100%;
+}
+
+.yay-title {
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  color: #ff6b9d;
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 20px rgba(255, 107, 157, 0.3);
+  font-weight: 900;
+  margin: 0;
+}
+
+.confetti-container {
+  display: flex;
+  gap: clamp(6px, 1vw, 10px);
+  font-size: clamp(1rem, 3.5vw, 1.6rem);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: clamp(4px, 1vw, 10px) 0;
+}
+
+.confetti {
+  animation: float 2.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+.confetti:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.confetti:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.confetti:nth-child(4) {
+  animation-delay: 0.45s;
+}
+
+.confetti:nth-child(5) {
+  animation-delay: 0.6s;
+}
+
+.confetti:nth-child(6) {
+  animation-delay: 0.75s;
+}
+
+.confetti:nth-child(7) {
+  animation-delay: 0.9s;
+}
+
+.yay-text {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  color: #2f3542;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.yay-subtext {
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  color: #666;
+  margin: clamp(4px, 1vw, 8px) 0 0 0;
+  line-height: 1.4;
+}
+
+.progress-dots {
+  display: flex;
+  gap: clamp(6px, 1.5vw, 8px);
+  margin-top: clamp(10px, 2vw, 14px);
+}
+
+.dot {
+  width: clamp(8px, 1.5vw, 10px);
+  height: clamp(8px, 1.5vw, 10px);
+  border-radius: 50%;
+  background: #ff6b9d;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ==================== FINAL LETTER SCREEN ==================== */
+
+.final-letter-screen {
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(72, 219, 251, 0.1));
+}
+
+.final-letter-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 2vw, 14px);
+  width: 100%;
+  max-width: 100%;
+}
+
+.final-title {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  color: #2f3542;
+  margin-bottom: clamp(8px, 2vw, 12px);
+  font-weight: 700;
+  animation: slideInDown 0.6s ease-out;
+}
+
+.final-subtitle {
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  color: #888;
+  margin-bottom: clamp(10px, 2vw, 14px);
+  animation: slideInUp 0.4s ease-out 0.1s both;
+}
+
+.flip-card-container {
+  perspective: 1000px;
+  height: clamp(300px, 60vw, 420px);
+  width: 100%;
+  margin: clamp(10px, 2vw, 16px) 0;
+  animation: fadeInScale 0.6s ease-out;
+}
+
+.flip-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flip-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  padding: clamp(14px, 2.5vw, 20px);
+}
+
+.flip-card-front {
+  background: linear-gradient(135deg, #ffe4e8 0%, #ffd4e5 100%);
+  border: 3px dashed #ff6b9d;
+  color: #2f3542;
+}
+
+.flip-card-back {
+  background: white;
+  border: 3px solid #ff6b9d;
+  transform: rotateY(180deg);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: clamp(16px, 3vw, 22px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.flip-card-back::-webkit-scrollbar {
+  width: 6px;
+}
+
+.flip-card-back::-webkit-scrollbar-track {
+  background: rgba(255, 107, 157, 0.1);
+  border-radius: 10px;
+}
+
+.flip-card-back::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 157, 0.5);
+  border-radius: 10px;
+}
+
+.flip-card-back::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 107, 157, 0.8);
+}
+
+.teddy-wrapper {
+  width: clamp(80px, 20vw, 130px);
+  height: clamp(100px, 22vw, 150px);
+  margin-bottom: clamp(10px, 2vw, 14px);
+  animation: float 3s ease-in-out infinite;
+}
+
+.teddy-illustration {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+}
+
+.card-hint {
+  font-size: 0.95rem;
+  color: #ff6b9d;
+  font-weight: 600;
+  animation: bounce 2s ease-in-out infinite;
+  margin: 0;
+}
+
+.letter-content-inner {
+  text-align: left;
+  color: #2f3542;
+  border: 2px dashed #ff6b9d;
+  border-radius: 10px;
+  padding: clamp(14px, 3vw, 20px);
+  background: rgba(255, 107, 157, 0.02);
+  width: 100%;
+  max-width: 100%;
+}
+
+.letter-content-inner h2 {
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  color: #ff6b9d;
+  text-align: center;
+  margin-bottom: clamp(10px, 2vw, 14px);
+  margin-top: 0;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.letter-content-inner p {
+  font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+  line-height: 1.7;
+  margin: 0 0 clamp(8px, 1.5vw, 12px) 0;
+  text-align: left;
+  color: #555;
+  word-wrap: break-word;
+}
+
+.signature {
+  text-align: right;
+  font-weight: 600;
+  margin-top: clamp(16px, 3vw, 20px);
+  line-height: 1.8;
+}
+
+.signature-name {
+  font-style: italic;
+  color: #ff6b9d;
+}
+
+.final-hearts-display {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin: 20px 0;
+}
+
+.heart-float {
+  animation: float 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+.final-message {
+  font-size: 1.2rem;
+  color: #ff6b9d;
+  font-weight: 700;
+  animation: slideInUp 0.6s ease-out 0.3s both;
+  margin: 0;
+}
+
+/* ==================== BUTTON STYLES ==================== */
+
+.button {
+  padding: clamp(8px, 2vw, 10px) clamp(16px, 3vw, 24px);
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #ff6b9d 0%, #ff9a8b 100%);
+  color: white;
+  padding: clamp(10px, 2.5vw, 14px) clamp(25px, 5vw, 35px);
+  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+}
+
+.button-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+.button-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+/* Large Screens (1024px and above) */
+@media (min-width: 1024px) {
+  .card-container {
+    max-width: none;
+    width: 90vw;
+    max-height: 92vh;
+  }
+
+  .white-card {
+    padding: clamp(16px, 2.5vw, 24px) clamp(14px, 2vw, 20px);
+  }
+
+  .hearts-interactive-grid {
+    grid-template-columns: 1fr 1fr;
+    max-width: clamp(300px, 70vw, 400px);
+  }
+
+  .interactive-heart {
+    width: clamp(100px, 20vw, 150px);
+    height: clamp(100px, 20vw, 150px);
+  }
+
+  .heart-shape {
+    font-size: clamp(2.8rem, 6vw, 3.5rem);
+  }
+}
+
+/* Tablets (769px - 1023px) */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .card-container {
+    max-width: none;
+    width: 90vw;
+    max-height: 88vh;
+  }
+
+  .white-card {
+    padding: clamp(16px, 2.5vw, 22px) clamp(14px, 2vw, 18px);
+  }
+
+  .intro-title,
+  .section-title,
+  .proposal-title {
+    font-size: clamp(1.6rem, 4vw, 2rem);
+  }
+
+  .intro-subtitle,
+  .section-subtitle {
+    font-size: clamp(0.9rem, 2vw, 0.98rem);
+  }
+
+  .gift-container,
+  .cat-container,
+  .teddy-wrapper {
+    width: clamp(110px, 25vw, 130px);
+    height: clamp(110px, 30vw, 130px);
+  }
+
+  .gift-illustration,
+  .cat-illustration,
+  .teddy-illustration {
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.12));
+  }
+
+  .hearts-interactive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(14px, 3vw, 18px);
+    max-width: 340px;
+  }
+
+  .interactive-heart {
+    width: clamp(120px, 25vw, 140px);
+    height: clamp(120px, 25vw, 140px);
+  }
+
+  .heart-shape {
+    font-size: clamp(2.5rem, 5vw, 3rem);
+  }
+
+  .heart-text {
+    font-size: clamp(0.8rem, 2vw, 0.88rem);
+  }
+
+  .memory-carousel {
+    padding: 25px;
+    gap: 20px;
+  }
+
+  .memory-image {
+    width: 180px;
+    height: 180px;
+  }
+
+  .carousel-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 1.2rem;
+  }
+
+  .proposal-text {
+    font-size: 1.05rem;
+  }
+
+  .proposal-buttons {
+    gap: 25px;
+  }
+
+  .button-yes,
+  .button-no {
+    padding: 15px 40px;
+    font-size: 1.05rem;
+    min-width: 140px;
+  }
+
+  .flip-card-container {
+    height: 380px;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: 25px;
+  }
+
+  .yay-title {
+    font-size: 3rem;
+  }
+
+  .confetti-container {
+    font-size: 2.2rem;
+    gap: 12px;
+  }
+
+  .tape {
+    width: 55px;
+    height: 75px;
+  }
+
+  .tape-top-left {
+    top: 90px;
+    left: 15px;
+  }
+
+  .tape-bottom-right {
+    bottom: 90px;
+    right: 15px;
+  }
+
+  .scallop-top,
+  .scallop-bottom {
+    height: 70px;
+  }
+}
+
+/* Small tablets and large phones (576px - 768px) */
+@media (max-width: 768px) and (min-width: 576px) {
+  .card-container {
+    max-width: 92vw;
+    max-height: 90vh;
+  }
+
+  .white-card {
+    padding: clamp(12px, 2.5vw, 18px) clamp(10px, 2vw, 16px);
+  }
+
+  .intro-title,
+  .section-title,
+  .proposal-title {
+    font-size: clamp(1.5rem, 4vw, 1.75rem);
+    margin-bottom: clamp(10px, 2vw, 12px);
+  }
+
+  .intro-subtitle,
+  .section-subtitle {
+    font-size: clamp(0.9rem, 2vw, 0.94rem);
+    margin-bottom: clamp(20px, 3vw, 25px);
+  }
+
+  .gift-container,
+  .cat-container,
+  .teddy-wrapper {
+    width: clamp(100px, 22vw, 120px);
+    height: clamp(100px, 22vw, 120px);
+    margin-bottom: clamp(20px, 3vw, 25px);
+  }
+
+  .hearts-interactive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(12px, 2vw, 16px);
+    margin: clamp(24px, 4vw, 30px) auto;
+    max-width: 300px;
+  }
+
+  .interactive-heart {
+    width: clamp(110px, 23vw, 130px);
+    height: clamp(110px, 23vw, 130px);
+    border-radius: 0;
+  }
+
+  .heart-shape {
+    font-size: clamp(2.4rem, 5vw, 2.8rem);
+  }
+
+  .heart-text {
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
+  }
+
+  .continue-button {
+    margin-top: clamp(12px, 2vw, 15px);
+    padding: clamp(10px, 2vw, 12px) clamp(24px, 4vw, 30px);
+  }
+
+  .memory-carousel {
+    padding: clamp(18px, 3vw, 22px);
+    gap: clamp(14px, 2vw, 18px);
+    margin: clamp(20px, 3vw, 25px) 0;
+  }
+
+  .carousel-content {
+    gap: clamp(14px, 2vw, 18px);
+  }
+
+  .memory-image {
+    width: clamp(140px, 30vw, 160px);
+    height: clamp(140px, 30vw, 160px);
+  }
+
+  .memory-info h3 {
+    font-size: clamp(1.2rem, 3vw, 1.4rem);
+    margin-bottom: clamp(6px, 1vw, 8px);
+  }
+
+  .memory-info p {
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
+    line-height: 1.4;
+  }
+
+  .carousel-btn {
+    width: clamp(35px, 8vw, 40px);
+    height: clamp(35px, 8vw, 40px);
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+  }
+
+  .proposal-text {
+    font-size: clamp(0.95rem, 2.2vw, 1.02rem);
+    margin-bottom: clamp(20px, 3vw, 25px);
+  }
+
+  .proposal-buttons {
+    gap: clamp(16px, 3vw, 20px);
+    margin-top: clamp(20px, 3vw, 25px);
+  }
+
+  .button-yes,
+  .button-no {
+    padding: clamp(10px, 2vw, 14px) clamp(28px, 4vw, 35px);
+    font-size: clamp(0.95rem, 2vw, 1rem);
+    min-width: clamp(120px, 28vw, 135px);
+  }
+
+  .flip-card-container {
+    height: clamp(320px, 60vw, 360px);
+    margin: clamp(15px, 2vw, 18px) 0;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: clamp(18px, 3vw, 22px);
+    border-radius: 12px;
+  }
+
+  .teddy-wrapper {
+    width: clamp(120px, 28vw, 140px);
+    height: clamp(140px, 32vw, 160px);
+  }
+
+  .letter-content-inner h2 {
+    font-size: clamp(1.4rem, 3.5vw, 1.6rem);
+    margin-bottom: clamp(14px, 2vw, 18px);
+  }
+
+  .letter-content-inner p {
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
+    line-height: 1.7;
+    margin-bottom: clamp(10px, 2vw, 12px);
+  }
+
+  .signature {
+    margin-top: clamp(20px, 3vw, 25px);
+  }
+
+  .final-hearts-display {
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    gap: clamp(10px, 2vw, 12px);
+    margin: clamp(14px, 2vw, 18px) 0;
+  }
+
+  .final-message {
+    font-size: clamp(1rem, 2.2vw, 1.1rem);
+    margin-bottom: clamp(8px, 1vw, 10px);
+  }
+
+  .yay-title {
+    font-size: clamp(2.4rem, 6vw, 2.8rem);
+  }
+
+  .confetti-container {
+    font-size: clamp(1.7rem, 4vw, 2rem);
+    gap: clamp(8px, 1.5vw, 10px);
+    margin: clamp(14px, 2vw, 18px) 0;
+  }
+
+  .yay-text {
+    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+  }
+
+  .yay-subtext {
+    font-size: 0.98rem;
+  }
+
+  .tape {
+    width: 48px;
+    height: 68px;
+  }
+
+  .tape-top-left {
+    top: 80px;
+    left: 12px;
+    width: 48px;
+    height: 68px;
+  }
+
+  .tape-bottom-right {
+    bottom: 80px;
+    right: 12px;
+    width: 48px;
+    height: 68px;
+  }
+
+  .scallop-top,
+  .scallop-bottom {
+    height: 65px;
+  }
+
+  .screen-wrapper {
+    padding: 30px 15px;
+  }
+}
+
+/* Mobile phones (375px - 575px) */
+@media (max-width: 575px) and (min-width: 375px) {
+  .card-container {
+    width: 94vw;
+    max-width: 100%;
+    max-height: 92vh;
+  }
+
+  .white-card {
+    padding: clamp(12px, 2.5vw, 16px) clamp(10px, 1.5vw, 14px);
+    border-radius: 16px;
+  }
+
+  .screen-wrapper {
+    padding: clamp(8px, 1.5vw, 12px) clamp(4px, 1vw, 8px);
+    min-height: auto;
+  }
+
+  .intro-content,
+  .why-you-content,
+  .memories-content,
+  .proposal-content,
+  .yay-content,
+  .final-letter-content {
+    max-width: 100%;
+  }
+
+  .intro-title,
+  .section-title,
+  .proposal-title {
+    font-size: clamp(1.4rem, 4vw, 1.55rem);
+    margin-bottom: clamp(8px, 2vw, 10px);
+  }
+
+  .intro-subtitle,
+  .section-subtitle {
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
+    margin-bottom: clamp(18px, 3vw, 20px);
+    line-height: 1.5;
+  }
+
+  .gift-container,
+  .cat-container,
+  .teddy-wrapper {
+    width: clamp(100px, 20vw, 110px);
+    height: clamp(100px, 20vw, 110px);
+    margin-bottom: clamp(18px, 3vw, 20px);
+  }
+
+  .hearts-interactive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(10px, 2vw, 12px);
+    margin: clamp(20px, 3vw, 25px) auto;
+    max-width: 280px;
+  }
+
+  .interactive-heart {
+    width: clamp(110px, 22vw, 120px);
+    height: clamp(110px, 22vw, 120px);
+    border-radius: 0;
+  }
+
+  .heart-shape {
+    font-size: clamp(2.2rem, 5vw, 2.5rem);
+  }
+
+  .heart-text {
+    font-size: clamp(0.78rem, 1.8vw, 0.82rem);
+    line-height: 1.4;
+  }
+
+  .continue-button {
+    margin-top: clamp(10px, 2vw, 12px);
+    padding: clamp(10px, 2vw, 11px) clamp(22px, 3vw, 25px);
+    font-size: clamp(0.92rem, 2vw, 0.98rem);
+  }
+
+  .button {
+    padding: clamp(10px, 2vw, 11px) clamp(22px, 3vw, 25px);
+    font-size: clamp(0.92rem, 2vw, 0.96rem);
+  }
+
+  .button-primary {
+    padding: clamp(11px, 2vw, 12px) clamp(24px, 3vw, 28px);
+    font-size: clamp(0.96rem, 2vw, 1.01rem);
+  }
+
+  .memory-carousel {
+    padding: clamp(16px, 2vw, 18px);
+    gap: clamp(12px, 2vw, 14px);
+    margin: clamp(20px, 3vw, 22px) 0;
+    flex-direction: column;
+  }
+
+  .carousel-content {
+    gap: clamp(12px, 2vw, 14px);
+    flex-direction: column;
+  }
+
+  .memory-image {
+    width: 100%;
+    height: clamp(180px, 40vw, 200px);
+    max-width: none;
+  }
+
+  .memory-info {
+    width: 100%;
+  }
+
+  .memory-info h3 {
+    font-size: clamp(1.2rem, 3vw, 1.3rem);
+    margin-bottom: clamp(6px, 1vw, 8px);
+  }
+
+  .memory-info p {
+    font-size: clamp(0.88rem, 2vw, 0.92rem);
+    line-height: 1.4;
+    margin-bottom: clamp(6px, 1vw, 8px);
+  }
+
+  .carousel-btn {
+    width: clamp(36px, 8vw, 38px);
+    height: clamp(36px, 8vw, 38px);
+    font-size: clamp(0.95rem, 2vw, 1rem);
+  }
+
+  .carousel-indicators {
+    margin-top: clamp(10px, 2vw, 12px);
+    gap: clamp(5px, 1vw, 6px);
+  }
+
+  .indicator {
+    width: clamp(8px, 1.5vw, 9px);
+    height: clamp(8px, 1.5vw, 9px);
+  }
+
+  .proposal-text {
+    font-size: clamp(0.93rem, 2.2vw, 0.98rem);
+    line-height: 1.6;
+    margin-bottom: clamp(20px, 3vw, 22px);
+  }
+
+  .proposal-buttons {
+    flex-direction: column;
+    gap: clamp(10px, 2vw, 12px);
+    margin-top: clamp(20px, 3vw, 22px);
+  }
+
+  .button-yes,
+  .button-no {
+    width: 100%;
+    padding: clamp(12px, 2vw, 13px) clamp(22px, 4vw, 25px);
+    font-size: clamp(0.93rem, 2vw, 0.98rem);
+    min-width: unset;
+  }
+
+  .flip-card-container {
+    height: clamp(300px, 60vw, 320px);
+    margin: clamp(12px, 2vw, 15px) 0;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: clamp(16px, 2vw, 18px);
+    border-radius: 12px;
+  }
+
+  .teddy-wrapper {
+    width: clamp(110px, 22vw, 120px);
+    height: clamp(130px, 26vw, 140px);
+    margin-bottom: clamp(12px, 2vw, 15px);
+  }
+
+  .card-hint {
+    font-size: clamp(0.82rem, 2vw, 0.88rem);
+  }
+
+  .letter-content-inner {
+    padding: 0 clamp(0px, 1vw, 2px);
+  }
+
+  .letter-content-inner h2 {
+    font-size: clamp(1.4rem, 3.5vw, 1.5rem);
+    margin-bottom: clamp(12px, 2vw, 15px);
+  }
+
+  .letter-content-inner p {
+    font-size: clamp(0.88rem, 2vw, 0.92rem);
+    line-height: 1.6;
+    margin-bottom: clamp(8px, 1vw, 10px);
+    text-align: left;
+  }
+
+  .signature {
+    margin-top: clamp(18px, 3vw, 20px);
+    line-height: 1.6;
+  }
+
+  .signature-name {
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
+  }
+
+  .final-hearts-display {
+    font-size: clamp(1.8rem, 4vw, 2rem);
+    gap: clamp(8px, 1.5vw, 10px);
+    margin: clamp(12px, 2vw, 15px) 0;
+  }
+
+  .final-message {
+    font-size: clamp(1rem, 2.2vw, 1.05rem);
+  }
+
+  .yay-title {
+    font-size: clamp(2.2rem, 5.5vw, 2.4rem);
+  }
+
+  .confetti-container {
+    font-size: clamp(1.6rem, 3.5vw, 1.8rem);
+    gap: clamp(6px, 1.5vw, 8px);
+    margin: clamp(12px, 2vw, 15px) 0;
+  }
+
+  .yay-text {
+    font-size: clamp(1rem, 2.2vw, 1.1rem);
+  }
+
+  .yay-subtext {
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
+  }
+
+  .progress-dots {
+    margin-top: clamp(12px, 2vw, 15px);
+  }
+
+  .dot {
+    width: clamp(8px, 1.5vw, 9px);
+    height: clamp(8px, 1.5vw, 9px);
+  }
+
+  .tape-top-left,
+  .tape-bottom-right {
+    display: none;
+  }
+
+  .scallop-top,
+  .scallop-bottom {
+    height: clamp(50px, 10vw, 55px);
+  }
+
+  .grid-pattern {
+    background-size: clamp(32px, 8vw, 35px) clamp(32px, 8vw, 35px);
+  }
+
+  .memory-carousel {
+    flex-direction: column;
+    padding: clamp(12px, 2.5vw, 16px);
+    gap: clamp(10px, 2.5vw, 12px);
+  }
+
+  .carousel-content {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .memory-image {
+    width: clamp(100px, 35vw, 140px);
+    height: clamp(100px, 35vw, 140px);
+  }
+
+  .memory-info h3 {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+  }
+
+  .carousel-btn {
+    width: clamp(28px, 7vw, 35px);
+    height: clamp(28px, 7vw, 35px);
+  }
+}
+
+/* Extra small phones (< 375px) */
+@media (max-width: 374px) {
+  .card-container {
+    width: 92vw;
+    max-height: 95vh;
+  }
+
+  .white-card {
+    padding: clamp(10px, 2vw, 14px) clamp(8px, 1.5vw, 12px);
+    border-radius: 14px;
+  }
+
+  .screen-wrapper {
+    padding: clamp(6px, 1vw, 10px) clamp(4px, 0.8vw, 6px);
+  }
+
+  .intro-title,
+  .section-title,
+  .proposal-title {
+    font-size: clamp(1.3rem, 3.5vw, 1.4rem);
+    margin-bottom: clamp(6px, 1.5vw, 8px);
+  }
+
+  .intro-subtitle,
+  .section-subtitle {
+    font-size: clamp(0.8rem, 1.8vw, 0.85rem);
+    margin-bottom: clamp(16px, 3vw, 18px);
+  }
+
+  .gift-container,
+  .cat-container,
+  .teddy-wrapper {
+    width: clamp(90px, 20vw, 100px);
+    height: clamp(90px, 20vw, 100px);
+    margin-bottom: clamp(16px, 2vw, 18px);
+  }
+
+  .hearts-interactive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(8px, 1.5vw, 10px);
+    margin: clamp(18px, 3vw, 20px) auto;
+    max-width: 260px;
+  }
+
+  .interactive-heart {
+    width: clamp(100px, 22vw, 110px);
+    height: clamp(100px, 22vw, 110px);
+    border-radius: 0;
+  }
+
+  .heart-shape {
+    font-size: clamp(2.1rem, 4.5vw, 2.3rem);
+  }
+
+  .heart-text {
+    font-size: clamp(0.74rem, 1.6vw, 0.78rem);
+  }
+
+  .section-subtitle {
+    font-size: clamp(0.78rem, 1.8vw, 0.82rem);
+  }
+
+  .continue-button {
+    padding: clamp(8px, 1.5vw, 10px) clamp(18px, 3vw, 22px);
+    font-size: clamp(0.88rem, 1.8vw, 0.92rem);
+  }
+
+  .button {
+    padding: clamp(8px, 1.5vw, 10px) clamp(16px, 3vw, 20px);
+    font-size: clamp(0.88rem, 1.8vw, 0.92rem);
+  }
+
+  .button-primary {
+    padding: clamp(9px, 1.5vw, 11px) clamp(20px, 3vw, 24px);
+    font-size: clamp(0.92rem, 1.8vw, 0.98rem);
+  }
+
+  .memory-carousel {
+    padding: clamp(14px, 2vw, 16px);
+    gap: clamp(10px, 1.5vw, 12px);
+    margin: clamp(18px, 3vw, 20px) 0;
+  }
+
+  .memory-image {
+    height: clamp(160px, 35vw, 180px);
+  }
+
+  .memory-info h3 {
+    font-size: clamp(1.1rem, 2.8vw, 1.2rem);
+  }
+
+  .memory-info p {
+    font-size: clamp(0.84rem, 1.8vw, 0.88rem);
+  }
+
+  .carousel-btn {
+    width: clamp(32px, 7vw, 36px);
+    height: clamp(32px, 7vw, 36px);
+    font-size: clamp(0.9rem, 1.8vw, 0.95rem);
+  }
+
+  .proposal-text {
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
+    margin-bottom: clamp(18px, 3vw, 20px);
+  }
+
+  .proposal-buttons {
+    gap: clamp(8px, 1.5vw, 10px);
+    margin-top: clamp(18px, 3vw, 20px);
+  }
+
+  .button-yes,
+  .button-no {
+    padding: clamp(10px, 1.5vw, 12px) clamp(18px, 3vw, 22px);
+    font-size: clamp(0.9rem, 1.8vw, 0.95rem);
+  }
+
+  .flip-card-container {
+    height: clamp(280px, 55vw, 300px);
+    margin: clamp(10px, 1.5vw, 12px) 0;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: clamp(14px, 2vw, 16px);
+  }
+
+  .letter-content-inner h2 {
+    font-size: clamp(1.3rem, 3.2vw, 1.4rem);
+    margin-bottom: clamp(10px, 1.5vw, 12px);
+  }
+
+  .letter-content-inner p {
+    font-size: clamp(0.84rem, 1.8vw, 0.88rem);
+    line-height: 1.5;
+    margin-bottom: clamp(6px, 1vw, 8px);
+  }
+
+  .final-hearts-display {
+    font-size: clamp(1.6rem, 3.5vw, 1.8rem);
+    gap: clamp(6px, 1.2vw, 8px);
+  }
+
+  .final-message {
+    font-size: clamp(0.95rem, 2vw, 1rem);
+  }
+
+  .yay-title {
+    font-size: clamp(2rem, 5vw, 2.1rem);
+  }
+
+  .confetti-container {
+    font-size: clamp(1.4rem, 3vw, 1.6rem);
+    gap: clamp(4px, 1vw, 6px);
+  }
+
+  .yay-text {
+    font-size: clamp(0.95rem, 2vw, 1rem);
+  }
+
+  .yay-subtext {
+    font-size: clamp(0.84rem, 1.8vw, 0.9rem);
+  }
+
+  .scallop-top,
+  .scallop-bottom {
+    height: clamp(45px, 10vw, 50px);
+  }
+
+  .grid-pattern {
+    background-size: clamp(28px, 7vw, 30px) clamp(28px, 7vw, 30px);
+  }
+}
+
+/* Extra Large Screens (1920px and above) */
+@media (min-width: 1920px) {
+  .card-container {
+    max-width: 900px;
+    width: 75vw;
+  }
+
+  .white-card {
+    padding: 40px 36px;
+  }
+
+  .section-title {
+    font-size: 2.4rem;
+  }
+
+  .proposal-title {
+    font-size: 2.4rem;
+  }
+
+  .gift-container,
+  .cat-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .interactive-heart {
+    width: 150px;
+    height: 150px;
+  }
+
+  .hearts-interactive-grid {
+    max-width: 400px;
+    gap: 20px;
+  }
+
+  .button {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+
+  .button-yes,
+  .button-no {
+    padding: 12px 40px;
+    font-size: 1.05rem;
+    min-width: 150px;
+  }
+}
