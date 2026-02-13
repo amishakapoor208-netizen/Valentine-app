@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Background from './components/Background';
 import Intro from './screens/Intro';
 import WhyYou from './screens/WhyYou';
-import Memories from './screens/Memories';
 import Proposal from './screens/Proposal';
 import Yay from './screens/Yay';
 import FinalLetter from './screens/FinalLetter';
@@ -20,9 +19,7 @@ function App() {
       case 'intro':
         return <Intro onNext={() => handleScreenChange('whyYou')} />;
       case 'whyYou':
-        return <WhyYou onNext={() => handleScreenChange('memories')} />;
-      case 'memories':
-        return <Memories onNext={() => handleScreenChange('proposal')} />;
+        return <WhyYou onNext={() => handleScreenChange('proposal')} />;
       case 'proposal':
         return (
           <Proposal 
