@@ -7,6 +7,8 @@ import IntroScreen from "@/components/screens/IntroScreen"
 import CakeScreen from "@/components/screens/CakeScreen"
 import PhotosScreen from "@/components/screens/PhotosScreen"
 import MessageScreen from "@/components/screens/MessageScreen"
+import GiftBoxScreen from "@/components/screens/GiftBoxScreen"
+import GiftScreen from "@/components/screens/GiftScreen"
 
 export default function HomePage() {
   const [currentScreen, setCurrentScreen] = useState(0)
@@ -16,7 +18,9 @@ export default function HomePage() {
     <IntroScreen key="intro" onNext={() => setCurrentScreen(2)} />,
     <CakeScreen key="cake" onNext={() => setCurrentScreen(3)} />,
     <PhotosScreen key="photos" onNext={() => setCurrentScreen(4)} />,
-    <MessageScreen key="message" />,
+    <MessageScreen key="message" onNext={() => setCurrentScreen(5)} />,
+    <GiftBoxScreen key="giftbox" onNext={() => setCurrentScreen(6)} />,
+    <GiftScreen key="gift" onNext={() => setCurrentScreen(0)} />,
   ]
 
   return (

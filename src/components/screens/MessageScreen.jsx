@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import Button from "../Button"
+import { MoveRight } from "lucide-react"
 
-export default function MessageScreen() {
+export default function MessageScreen({ onNext }) {
     const [opened, setOpened] = useState(false)
 
     return (
@@ -27,9 +29,17 @@ export default function MessageScreen() {
                 <div className={`cover ${opened ? "opacity-0" : "opacity-100"} pointer-events-none z-10 bg-[#ffedea]!`} />
 
                 <div className="relative px-6 h-56 overflow-y-auto text-foreground">
-                    Happy Birthday, Cutiepie! You deserve all the happiness, love, and smiles in the world today and always. You have this special way of making everything around you brighter, your smile, your kindness, and the way you make people feel truly cared for. I hope your day is filled with laughter, surprises, and moments that make your heart happy. You’re truly one of a kind, and I just want you to know how special you are. Keep being the amazing person you are, spreading joy wherever you go. Wishing you endless happiness, success, and all the sweet things life has to offer. 💗
+                    Happyy birthdayy chuchuuu❤️ You deserve all the happiness, love and smiles in the world today and always. I love you a lot and I feel lucky to be your boyfriend kyuki tu itne pyaar se rkhti and itne efforts daalti I am genuinely lucky❤️. Finally bada ho gyaa tuuu 🕺 abhi toh bhot saal jhelna pdega tereko mujhe😊❤️. I lovee youu and happyy birthdayy my cutu panda❤️
                 </div>
             </div>
+
+            {onNext && (
+                <div className="mt-6 flex justify-center">
+                    <Button onClick={onNext} className="bg-[#ffccd3] text-secondary hover:bg-[#ffb3c1]">
+                        <MoveRight size={18} /> Next
+                    </Button>
+                </div>
+            )}
         </div>
     )
 }
